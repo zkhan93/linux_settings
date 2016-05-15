@@ -1,0 +1,104 @@
+#==============================================================================
+#                               conkyrc_orange
+#							http://www.NoobsLab.com
+#  author  : SLK
+#  version : v2011011601
+#  license : Distributed under the terms of GNU GPL version 2 or later
+#
+#==============================================================================
+
+background yes
+update_interval 1
+
+cpu_avg_samples 2
+net_avg_samples 2
+temperature_unit celsius
+
+double_buffer yes
+no_buffers yes
+text_buffer_size 2048
+
+gap_x 10
+gap_y 10
+minimum_size 200 1024
+maximum_width 200
+#maximum_heigth 1024
+own_window yes
+#own_window_type conky
+own_window_argb_visual yes
+own_window_transparent yes
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+border_inner_margin 0
+border_outer_margin 0
+alignment top_right
+
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+override_utf8_locale yes
+use_xft yes
+xftfont caviar dreams:size=8
+xftalpha 0.5
+uppercase no
+
+default_color FFFFFF
+color1 FFFFFF#DDDDDD
+color2 FFFFFF#AAAAAA
+color3 FFFFFF#888888
+color4 FFFFFF#EF5A29
+color5 EF5A29
+
+lua_load ./.conky/conky_orange.lua
+lua_draw_hook_post main
+#lua_load ./.conky/crings_ns.lua
+#lua_draw_hook_pre clock_rings
+
+#${voffset 35}
+#${goto 95}${color3}${font ubuntu:size=32}${time %e}${color1}${voffset 0}${offset -60}${font ubuntu:size=10}${time %A}
+#${goto 85}${color2}${voffset -2}${font ubuntu:size=9}${time %b}${voffset -2} ${color3}${font ubuntu:size=12}${time %Y}${font}
+#
+#${voffset 70}
+
+
+own_window_argb_value 0
+own_window_colour 000000
+TEXT
+${voffset 70}
+${goto 90}${color EF5A29}${font ubuntu:size=22,weight:bold}${time %e}
+${font ubuntu:size=9}${goto 80}${voffset -20}${color2}${font ubuntu:size=9}${time %b}${voffset 20} ${color3}${font ubuntu:size=12}${voffset -20}${time %Y}${font}
+${goto 87}${color EF5A29}${voffset -2}${font ubuntu:size=10,weight:bold}${time %A}
+
+
+
+${alignc}${color EF5A29}${font ubuntu:size=11,weight:bold} Upload
+${alignr}${font ubuntu:size=9}${totalup wlan0}${font ubuntu:size=3}
+
+${voffset 30}
+${goto 90}${color FFFFFF}${font Ubuntu:size=8,weight:normal} Ethernet${alignr}${upspeed eth0}
+${goto 90}${font Ubuntu:size=8,weight:normal} WiFi${alignr}${upspeed wlan0}
+${goto 90}${font Ubuntu:size=8,weight:normal} Tethering${alignr}${upspeed usb0}
+
+
+${alignc}${color EF5A29}${font Ubuntu:size=11,weight:bold}Download
+${alignr}${font ubuntu:size=9}${totaldown wlan0}${font ubuntu:size=3}
+
+${voffset 35}
+${goto 90}${color FFFFFF}${font Ubuntu:size=8,weight:normal} Ethernet${alignr}${downspeed eth0}
+${goto 90}${font Ubuntu:size=8,weight:normal} WiFi${alignr}${downspeed wlan0}
+${goto 90}${font Ubuntu:size=8,weight:normal} Tethering${alignr}${downspeed usb0}
+
+
+${voffset 31}
+${goto 90}${color EF5A29}${font Ubuntu:size=10,weight:bold}BATTERY${font Ubuntu:size=8,weight:normal}( ${acpiacadapter} )
+${goto 90}${color FFFFFF}${battery}
+${goto 90}${battery_time}
+${font ubuntu:size=8}
+${alignc}Up Time ${uptime_short}
+${alignc}${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-26}
+${alignc}${color1}${freq_g} Ghz ${acpitemp}°C
+
+${alignc}IP WiFi   ${addrs wlan0}
+${alignc}IP NIC   ${addrs eth0}
+${font Biloxi Script:size=22,weight:bold}Zeeshan Khan
