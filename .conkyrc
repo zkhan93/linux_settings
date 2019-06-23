@@ -1,104 +1,106 @@
-#==============================================================================
-#                               conkyrc_orange
-#							http://www.NoobsLab.com
-#  author  : SLK
-#  version : v2011011601
-#  license : Distributed under the terms of GNU GPL version 2 or later
-#
-#==============================================================================
+conky.config = {
+--==============================================================================
+--                               conkyrc_orange
+--							http://www.NoobsLab.com
+--  author  : SLK
+--  version : v2011011601
+--  license : Distributed under the terms of GNU GPL version 2 or later
+--  default color orange E F 5 A 2 9, replace 2 4 2 5 2 A with this to set back to default
 
-background yes
-update_interval 1
+--==============================================================================
 
-cpu_avg_samples 2
-net_avg_samples 2
-temperature_unit celsius
+	background = true,
+	update_interval = 1,
 
-double_buffer yes
-no_buffers yes
-text_buffer_size 2048
+	cpu_avg_samples = 2,
+	net_avg_samples = 2,
+	temperature_unit = 'celsius',
 
-gap_x 10
-gap_y 10
-minimum_size 200 1024
-maximum_width 200
-#maximum_heigth 1024
-own_window yes
-#own_window_type conky
-own_window_argb_visual yes
-own_window_transparent yes
-own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
-border_inner_margin 0
-border_outer_margin 0
-alignment top_right
+	double_buffer = true,
+	no_buffers = true,
+	text_buffer_size = 2048,
 
-draw_shades no
-draw_outline no
-draw_borders no
-draw_graph_borders no
+	gap_x = 10,
+	gap_y = 10,
+	minimum_width = 200,
+	minimum_height = 1024,
+	maximum_width = 200,
+	own_window = true,
+	own_window_type = 'normal',
+	own_window_argb_visual = true,
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
+	border_inner_margin = 0,
+	border_outer_margin = 0,
+	alignment = 'top_right',
 
-override_utf8_locale yes
-use_xft yes
-xftfont caviar dreams:size=8
-xftalpha 0.5
-uppercase no
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = false,
 
-default_color FFFFFF
-color1 FFFFFF#DDDDDD
-color2 FFFFFF#AAAAAA
-color3 FFFFFF#888888
-color4 FFFFFF#EF5A29
-color5 EF5A29
+	override_utf8_locale = true,
+	use_xft = true,
+	font = 'caviar dreams:size=8',
+	xftalpha = 0.5,
+	uppercase = false,
 
-lua_load ./.conky/conky_orange.lua
-lua_draw_hook_post main
-#lua_load ./.conky/crings_ns.lua
-#lua_draw_hook_pre clock_rings
+	default_color = '#FFFFFF',
+	color1 = '#24252A',
+	color2 = '#242424',
 
-#${voffset 35}
-#${goto 95}${color3}${font ubuntu:size=32}${time %e}${color1}${voffset 0}${offset -60}${font ubuntu:size=10}${time %A}
-#${goto 85}${color2}${voffset -2}${font ubuntu:size=9}${time %b}${voffset -2} ${color3}${font ubuntu:size=12}${time %Y}${font}
-#
-#${voffset 70}
+	lua_load = '~/.conky/conky_orange.lua ~/.conky/conky_basic.lua',
+	lua_draw_hook_post = 'main',
 
+	own_window_argb_value = 0,
+	own_window_colour = '#000000',
+	if_up_strictness = address,
+};
 
-own_window_argb_value 0
-own_window_colour 000000
-TEXT
+conky.text = [[
 ${voffset 70}
-${goto 90}${color EF5A29}${font ubuntu:size=22,weight:bold}${time %e}
-${font ubuntu:size=9}${goto 80}${voffset -20}${color2}${font ubuntu:size=9}${time %b}${voffset 20} ${color3}${font ubuntu:size=12}${voffset -20}${time %Y}${font}
-${goto 87}${color EF5A29}${voffset -2}${font ubuntu:size=10,weight:bold}${time %A}
+${goto 90}${color1}${font ubuntu:size=22:style=Bold}${time %e}
+${font ubuntu:size=9}${goto 80}${voffset -20}${color2}${font ubuntu:size=9}${time %b}${voffset 20} ${color2}${font ubuntu:size=12}${voffset -20}${time %Y}${font}
+${goto 87}${color1}${voffset -2}${font ubuntu:size=10:style=Bold}${time %A}
 
+${voffset 40}
+$alignc$color1${font ubuntu:size=11:style=Bold}Upload
+${voffset 32}
+${goto 90}${font ubuntu:size=9}${lua activeiface totalup}
+${goto 90}${font Ubuntu:size=8:style=normal} $gw_iface ${alignr}${lua activeiface upspeed}
+${voffset 20}
+${alignc}${color1}${font Ubuntu:size=11:style=Bold}Download
+${voffset 32}
+${goto 90}${font ubuntu:size=9}${lua activeiface totaldown}
+${goto 90}${font Ubuntu:size=8:style=normal} $gw_iface ${alignr}${lua activeiface downspeed}
 
-
-${alignc}${color EF5A29}${font ubuntu:size=11,weight:bold} Upload
-${alignr}${font ubuntu:size=9}${totalup wlan0}${font ubuntu:size=3}
-
-${voffset 30}
-${goto 90}${color FFFFFF}${font Ubuntu:size=8,weight:normal} Ethernet${alignr}${upspeed eth0}
-${goto 90}${font Ubuntu:size=8,weight:normal} WiFi${alignr}${upspeed wlan0}
-${goto 90}${font Ubuntu:size=8,weight:normal} Tethering${alignr}${upspeed usb0}
-
-
-${alignc}${color EF5A29}${font Ubuntu:size=11,weight:bold}Download
-${alignr}${font ubuntu:size=9}${totaldown wlan0}${font ubuntu:size=3}
-
-${voffset 35}
-${goto 90}${color FFFFFF}${font Ubuntu:size=8,weight:normal} Ethernet${alignr}${downspeed eth0}
-${goto 90}${font Ubuntu:size=8,weight:normal} WiFi${alignr}${downspeed wlan0}
-${goto 90}${font Ubuntu:size=8,weight:normal} Tethering${alignr}${downspeed usb0}
-
-
-${voffset 31}
-${goto 90}${color EF5A29}${font Ubuntu:size=10,weight:bold}BATTERY${font Ubuntu:size=8,weight:normal}( ${acpiacadapter} )
-${goto 90}${color FFFFFF}${battery}
+${voffset 50}
+${goto 90}${color1}${font Ubuntu:size=10:style=Bold}BATTERY${font Ubuntu:size=8:style=normal}
+${goto 90}${color2}${battery}
 ${goto 90}${battery_time}
-${font ubuntu:size=8}
-${alignc}Up Time ${uptime_short}
-${alignc}${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-26}
-${alignc}${color1}${freq_g} Ghz ${acpitemp}°C
 
-${alignc}IP WiFi   ${addrs wlan0}
-${alignc}IP NIC   ${addrs eth0}
-${font Biloxi Script:size=22,weight:bold}Zeeshan Khan
+${alignc}${font Ubuntu:size=10:style=Bold}RAM Usage
+${alignc}${font ubuntu:size=8}${memperc}% of ${memmax}
+
+${alignc}${font Ubuntu:size=10:style=Bold}Disk Usage
+${alignc}${font ubuntu:size=8}${fs_free} of ${fs_size}
+
+${alignc}${font Ubuntu:size=10:style=Bold}CPU
+${alignc}${font ubuntu:size=8}Intel(R) Core(TM) i5-7200U
+${alignc}${color2}${freq_g} GHz  |  ${cpu}%  |  ${acpitemp}°C
+
+${alignc}${font Ubuntu:size=10:style=Bold}GPU
+${alignc}${font ubuntu:size=8}GeForce 940MX
+${alignc}${font ubuntu:size=8}${nvidia memfreq} / ${nvidia gpufreq} MHz  |  ${nvidia gpuutil}%  |  ${nvidia temp}°C
+
+${alignc}${font Ubuntu:size=10:style=Bold}Up Time
+${alignc}${font Ubuntu:size=8:style=normal}${uptime_short}
+
+${alignc}${font Ubuntu:size=10:style=Bold}IP Address
+${font Ubuntu:size=8:style=normal}\
+${alignc}${lua activeiface addr} / $gw_ip
+
+${voffset 20}
+${alignc}${font Biloxi Script:size=22}Zeeshan Khan
+${alignc}${color1}${font Ubuntu:size=12:style=Bold}${exec lsb_release -ds}
+]];
